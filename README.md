@@ -34,3 +34,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+<!-- Intro -->
+
+I am building an application where user can put their long unformatted but valid code and this application turns it into well maintained formatted code and after that user copy the link of the code and sent to his friends or someone else by using the link receiver can get the over the internet anywhere later i add captue functionality of the code snippet in image format so anyone can share it and i will also add to make a link public or private.
