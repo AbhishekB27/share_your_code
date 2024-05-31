@@ -27,7 +27,7 @@ const CodeShare = ({ code }: { code: string }) => {
 
     return (
         <form
-            className='bg-slate-900 relative max-w-5xl w-full overflow-hidden min-h-[90vh] text-white text-center rounded-md'>
+            className='bg-slate-900 relative max-w-5xl w-full overflow-hidden min-h-[80vh] text-white text-center rounded-md'>
             <div className='relative bg-slate-800 min-h-10 p-1 flex justify-between items-center px-3 gap-3'>
                 <div className='flex justify-start items-center gap-3'>
                     <div className='size-3 rounded-full bg-red-600'></div>
