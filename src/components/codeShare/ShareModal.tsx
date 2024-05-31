@@ -25,7 +25,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import generateRandomString from "@/lib/generateRandomString"
 import { useToast } from "../ui/use-toast"
-import copyToClipboard from "@/lib/copyToClipBoard"
+import copyToClipboard from "@/lib/copyToClipboard"
 
 const formSchema = z.object({
     title: z.string().min(2, {
