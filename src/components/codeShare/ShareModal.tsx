@@ -34,28 +34,43 @@ const formSchema = z.object({
     link: z.string().min(2, {
         message: "Link must be at least 2 characters.",
     }),
-    isPublic: z.boolean().default(false).optional(),
+    isPrivate: z.boolean().default(false).optional(),
 })
 
 
 export function ShareModal({ codeContent }: { codeContent: string }) {
     const [uniqueString, setUniqueString] = useState(generateRandomString(6))
+    const [link, setLink] = useState(`${process.env.NEXT_PUBLIC_DOMAIN}/shareYourCode/view/${uniqueString}`)
     const [isLoading, setIsLoading] = useState(false)
     const { toast } = useToast()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            link: `${process.env.NEXT_PUBLIC_DOMAIN}/sharYourCode/${uniqueString}`,
-            isPublic: false
+            link: link,
+            isPrivate: false
         },
     })
 
     const postData = async (data: any) => {
         try {
+            console.log(data)
             setIsLoading(true)
-            const response = await fetch('http://localhost:3000/api/shareYourCode', { method: 'POST', body: JSON.stringify(data) })
+            const response = await fetch('http://localhost:3000/api/shareYourCode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ...data, code: codeContent, uniqueKey: uniqueString }),
+            })
+            console.log(response)
+            if (!response?.ok) {
+                setIsLoading(false)
+                return toast({
+                    title: "Request Failed",
+                    description: "There was an issue processing your request.",
+                });
+            }
             const result = await response.json();
-            console.log(result)
             toast({
                 title: "Link Copied",
                 description: "The link has been copied to your clipboard.",
@@ -64,7 +79,6 @@ export function ShareModal({ codeContent }: { codeContent: string }) {
             });
             copyToClipboard(data?.link)
             setIsLoading(false)
-            return result
         } catch (error) {
             toast({
                 title: "Request Failed",
@@ -116,7 +130,7 @@ export function ShareModal({ codeContent }: { codeContent: string }) {
                                                 <div className="h-4 w-4" />
                                             </Button> : <Button type="submit" size="sm" className="px-3 relative">
 
-                                                <span className="sr-only">Copys</span>
+                                                <span className="sr-only">Copy</span>
                                                 <Copy className="h-4 w-4" />
                                             </Button>
                                         }
@@ -146,13 +160,19 @@ export function ShareModal({ codeContent }: { codeContent: string }) {
                         />
                         <FormField
                             control={form.control}
-                            name="isPublic"
+                            name="isPrivate"
                             render={({ field }) => (
                                 <FormItem>
                                     <div className="flex items-center space-x-2">
                                         <FormControl>
                                             <Checkbox checked={field.value}
-                                                onCheckedChange={field.onChange} />
+                                                onCheckedChange={(e) => {
+                                                    field.onChange(e);
+                                                    form.setValue('link', `${link}/?isPrivate=${e}`)
+                                                    console.log(e);
+                                                }}
+
+                                            />
                                         </FormControl>
                                         <FormLabel>Private</FormLabel>
                                     </div>
