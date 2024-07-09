@@ -12,13 +12,13 @@ export async function GET(request: NextRequest, { params }: Params) {
   try {
     const { uniqueKey } = params;
     const url = request.nextUrl;
-    const isPrivate = url.searchParams.get("isPrivate");
+    // const isPrivate = url.searchParams.get("isPrivate")
 
-    console.log("url: " + isPrivate);
-    const isValid = cookies().get("isValid")?.value;
+    const cookieStore = cookies();
+    const isValid = cookieStore.get("isValid")?.value;
     console.log("cookies", cookies().getAll());
     const code = await Code.findOne({ uniqueKey });
-    if (isPrivate && !isValid) {
+    if (code?.isPrivate && !isValid) {
       console.log("Yes It's Private");
       const message = {
         message: "Code is private",

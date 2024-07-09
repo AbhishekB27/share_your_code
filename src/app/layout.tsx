@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-[#0F0F13]`}>
         <Header />
-        <div className="py-12">
+        <div className="">
           {children}
           <Toaster />
         </div>
