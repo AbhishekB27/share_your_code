@@ -232,9 +232,9 @@ export default async function Snippets({ searchParams }: SnippetProp) {
 
   const { data, status } = await handleSearch(searchParams.search || '')
 
-  const firstColumn = data.filter((_: any, index: number) => index % 3 === 0);
+  const firstColumn = data?.filter((_: any, index: number) => index % 3 === 0);
   const secondColumn = data.filter((_: any, index: number) => index % 3 === 1);
-  const thirdColumn = data.filter((_: any, index: number) => index % 3 === 2);
+  const thirdColumn = data?.filter((_: any, index: number) => index % 3 === 2);
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 text-slate-50">
@@ -261,17 +261,17 @@ export default async function Snippets({ searchParams }: SnippetProp) {
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div className="grid gap-4 w-fit h-fit">
-          {firstColumn.map((code: CodeData, idx: number) => (
+          {firstColumn?.map((code: CodeData, idx: number) => (
             <CodeCard key={idx} code={code} />
           ))}
         </div>
         <div className="grid gap-4 w-fit h-fit">
-          {secondColumn.map((code: CodeData, idx: number) => (
+          {secondColumn?.map((code: CodeData, idx: number) => (
             <CodeCard key={idx} code={code} />
           ))}
         </div>
         <div className="grid gap-4 w-fit h-fit">
-          {thirdColumn.map((code: CodeData, idx: number) => (
+          {thirdColumn?.map((code: CodeData, idx: number) => (
             <CodeCard key={idx} code={code} />
           ))}
         </div>

@@ -35,7 +35,7 @@ const ViewCodeDialog = ({ code }: CodeProps) => {
                         and remove your data from our servers.
                     </DialogDescription>
                 </DialogHeader>
-                <CodeShare code={code.code} isCodeShareable={false} />
+                <CodeShare code={code?.code} isCodeShareable={false} />
             </DialogContent>
         </Dialog>
 
