@@ -52,9 +52,6 @@ interface CodeData {
   code: string;
 }
 
-interface Placeholder {
-  placeholder: string;
-}
 export default async function Snippets({ searchParams }: SnippetProp) {
   console.log(searchParams, "searchParams")
   const codeSnippets = [
@@ -250,7 +247,7 @@ export default async function Snippets({ searchParams }: SnippetProp) {
         </p>
       </div>
       <div className="flex items-center justify-between mb-8">
-        <Search placeholder="Search..." />
+        <Search />
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" className=" bg-slate-100/10 rounded-md">
             <FilterIcon className="w-5 h-5" />
