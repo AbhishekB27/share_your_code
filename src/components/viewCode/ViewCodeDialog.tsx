@@ -9,8 +9,15 @@ import {
 import { Button } from "../ui/button"
 import CodeShare from "../codeShare/CodeShare"
 
+interface CodeProps {
+    code: {
+        title: string,
+        code: string
 
-const ViewCodeDialog = ({ code }) => {
+    }
+}
+
+const ViewCodeDialog = ({ code }: CodeProps) => {
 
     return (
         <Dialog>
@@ -38,7 +45,7 @@ const ViewCodeDialog = ({ code }) => {
 export default ViewCodeDialog
 
 
-function ViewIcon(props) {
+function ViewIcon(props: { className: string }) {
     return (
         <svg
             {...props}

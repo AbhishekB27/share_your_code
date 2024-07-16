@@ -1,5 +1,4 @@
 import React from 'react'
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -8,7 +7,14 @@ import {
     CardHeader,
 } from "@/components/ui/card"
 import ViewCodeDialog from '../viewCode/ViewCodeDialog'
-const CodeCard = ({ code }) => {
+interface CodeProps {
+    code: {
+        title: string,
+        code: string
+
+    }
+}
+const CodeCard = ({ code }: CodeProps) => {
     return (
         <Card className="shadow-lg flex flex-col justify-start hover:shadow-2xl transition-shadow duration-300 bg-card overflow-auto  ">
             <CardHeader className="bg-muted-foreground/10 mb-4 px-6 py-3 rounded-b-md">
@@ -39,7 +45,7 @@ const CodeCard = ({ code }) => {
 
 export default CodeCard
 
-function CopyIcon(props) {
+function CopyIcon(props: { className: string }) {
     return (
         <svg
             {...props}
@@ -63,7 +69,7 @@ function CopyIcon(props) {
 
 
 
-function ShareIcon(props) {
+function ShareIcon(props: { className: string }) {
     return (
         <svg
             {...props}
@@ -84,22 +90,3 @@ function ShareIcon(props) {
     )
 }
 
-function ViewIcon(props) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-            <circle cx="12" cy="12" r="3" />
-        </svg>
-    )
-}

@@ -36,20 +36,23 @@ async function handleSearch(search: string) {
 
   return res.json()
 }
-import { Input } from "@/components/ui/input"
+
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import CodeCard from "@/components/codeCard/CodeCard"
 import Search from "@/components/Search/Search"
 
-export default async function Snippets({ params, searchParams }) {
+interface SnippetProp {
+  searchParams: {
+    search: string
+  }
+}
+
+interface CodeData {
+  title: string;
+  code: string;
+}
+
+export default async function Snippets({ searchParams }: SnippetProp) {
   console.log(searchParams, "searchParams")
   const codeSnippets = [
     {
@@ -229,9 +232,9 @@ export default async function Snippets({ params, searchParams }) {
 
   const { data, status } = await handleSearch(searchParams.search || '')
 
-  const firstColumn = data.filter((_, index) => index % 3 === 0);
-  const secondColumn = data.filter((_, index) => index % 3 === 1);
-  const thirdColumn = data.filter((_, index) => index % 3 === 2);
+  const firstColumn = data.filter((_: any, index: number) => index % 3 === 0);
+  const secondColumn = data.filter((_: any, index: number) => index % 3 === 1);
+  const thirdColumn = data.filter((_: any, index: number) => index % 3 === 2);
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 text-slate-50">
@@ -258,18 +261,18 @@ export default async function Snippets({ params, searchParams }) {
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div className="grid gap-4 w-fit h-fit">
-          {firstColumn.map((code) => (
-            <CodeCard code={code} />
+          {firstColumn.map((code: CodeData, idx: number) => (
+            <CodeCard key={idx} code={code} />
           ))}
         </div>
         <div className="grid gap-4 w-fit h-fit">
-          {secondColumn.map((code) => (
-            <CodeCard code={code} />
+          {secondColumn.map((code: CodeData, idx: number) => (
+            <CodeCard key={idx} code={code} />
           ))}
         </div>
         <div className="grid gap-4 w-fit h-fit">
-          {thirdColumn.map((code) => (
-            <CodeCard code={code} />
+          {thirdColumn.map((code: CodeData, idx: number) => (
+            <CodeCard key={idx} code={code} />
           ))}
         </div>
       </div>
@@ -280,7 +283,7 @@ export default async function Snippets({ params, searchParams }) {
 
 
 
-function FilterIcon(props) {
+function FilterIcon(props: { className: string }) {
   return (
     <svg
       {...props}
@@ -300,7 +303,7 @@ function FilterIcon(props) {
 }
 
 
-function ListOrderedIcon(props) {
+function ListOrderedIcon(props: { className: string }) {
   return (
     <svg
       {...props}

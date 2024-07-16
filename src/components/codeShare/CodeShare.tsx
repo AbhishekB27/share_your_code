@@ -20,7 +20,7 @@ const CodeShare = ({ code, isCodeShareable }: { code: string, isCodeShareable: b
         setCodeContent(code);
     }, [code]);
 
-    const handleFormatCode = async (code) => {
+    const handleFormatCode = async (code: string) => {
         try {
             const formatted = await prettier.format(code, {
                 parser: 'babel',

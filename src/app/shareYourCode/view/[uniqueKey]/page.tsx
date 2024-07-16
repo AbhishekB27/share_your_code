@@ -1,13 +1,24 @@
 "use client";
 
 import CodeShare from '@/components/codeShare/CodeShare';
-// import { cookies } from 'next/headers';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import React, { useEffect, useState } from 'react';
 
-const Page = ({ params, searchParams }) => {
-    const [data, setData] = useState(null);
+interface PageProps {
+    params: {
+        uniqueKey: string;
+    },
+    searchParams: {
+        isPrivate: string;
+    }
+}
+
+interface DataType {
+    code: string
+}
+const Page = ({ params, searchParams }: PageProps) => {
+    const [data, setData] = useState<DataType>({ code: '' });
     const router = useRouter()
 
     useEffect(() => {
