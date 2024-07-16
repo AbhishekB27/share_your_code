@@ -23,13 +23,51 @@ export async function POST(request: NextRequest) {
     const newCode = new Code({ ...body });
     console.log(newCode);
     await newCode.save();
+    if (body.secretKey) {
+      return NextResponse.json(
+        {
+          status: true,
+          message: "Successfully Created...",
+          data: { secretKey: newCode.secretKey },
+        },
+        { status: 200 }
+      );
+    }
 
     return NextResponse.json(
-      { status: true, message: "Successfully Created..." },
+      {
+        status: true,
+        message: "Successfully Created...",
+        data: {},
+      },
       { status: 200 }
     );
   } catch (error: any) {
     console.log(error);
     return NextResponse.json({ status: false, message: error.message });
+  }
+}
+// Get all public snippets
+
+export async function GET(request: NextRequest) {
+  const url = request.nextUrl;
+  const search = url.searchParams.get("search");
+  console.log(search, "search");
+  if (search) {
+    const searchCodes = await Code.find({
+      title: { $regex: `^${search}`, $options: "i" }, // 'i' for case-insensitive search
+    });
+    return NextResponse.json({
+      status: true,
+      data: searchCodes,
+      message: "Successfully retrieved...",
+    });
+  } else {
+    const codes = await Code.find({ isPrivate: false });
+    return NextResponse.json({
+      status: true,
+      data: codes,
+      message: "Successfully retrieved...",
+    });
   }
 }

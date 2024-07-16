@@ -46,7 +46,7 @@ const Page = ({ params, searchParams }) => {
 
     return (
         <div className='grid place-items-center relative'>
-            <CodeShare isCodeShareable code={data?.code} />
+            <CodeShare isCodeShareable={false} code={data?.code} />
         </div>
     );
 };

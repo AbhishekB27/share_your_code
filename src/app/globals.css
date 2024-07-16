@@ -59,3 +59,26 @@
       @apply bg-background text-foreground;
     }
   }
+
+
+/* custom */
+.shadow {
+  background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000);
+  background-size: 400% 400%;
+  width: auto;
+  height: auto;
+  /* border-radius: 20px; */
+  animation: animate 3s ease alternate infinite;
+
+}
+@keyframes animate {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

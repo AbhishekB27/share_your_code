@@ -19,9 +19,9 @@ import {
     InputOTPGroup,
     InputOTPSlot,
 } from "@/components/ui/input-otp"
-import { toast } from "@/components/ui/use-toast"
 import { useRouter, useSearchParams } from "next/navigation"
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
+import { toast } from "sonner"
 
 const FormSchema = z.object({
     pin: z.string().min(6, {
@@ -61,7 +61,8 @@ export function PassCode() {
             router.back()
         }
         else {
-            toast(resData.message)
+            // toast({ title: 'Message', description: resData?.msf })
+            toast(resData?.msg)
         }
         console.log(resData, 'resData')
         // The return value is *not* serialized

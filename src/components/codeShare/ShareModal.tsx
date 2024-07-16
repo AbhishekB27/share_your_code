@@ -1,31 +1,28 @@
 "use client"
-
 import { Copy } from "lucide-react"
-
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Checkbox } from "../ui/checkbox"
-import { TbCopy } from "react-icons/tb";
 import { FaShareNodes } from "react-icons/fa6";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import generateRandomString from "@/lib/generateRandomString"
-import { useToast } from "../ui/use-toast"
+import { toast } from 'sonner'
 import copyToClipboard from "@/lib/copyToClipboard"
+import { LuCopy } from "react-icons/lu";
+
+
 
 const formSchema = z.object({
     title: z.string().min(2, {
@@ -42,7 +39,7 @@ export function ShareModal({ codeContent }: { codeContent: string }) {
     const [uniqueString, setUniqueString] = useState(generateRandomString(6))
     const [link, setLink] = useState(`${process.env.NEXT_PUBLIC_DOMAIN}/shareYourCode/view/${uniqueString}`)
     const [isLoading, setIsLoading] = useState(false)
-    const { toast } = useToast()
+    // const { toast } = useToast()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -65,25 +62,31 @@ export function ShareModal({ codeContent }: { codeContent: string }) {
             console.log(response)
             if (!response?.ok) {
                 setIsLoading(false)
-                return toast({
-                    title: "Request Failed",
+                return toast.message('Request Failed', {
                     description: "There was an issue processing your request.",
-                });
+                })
+
             }
             const result = await response.json();
-            toast({
-                title: "Link Copied",
-                description: "The link has been copied to your clipboard.",
-                duration: 5000, // Optional: Duration the toast should be visible (in milliseconds)
+            if (result?.data?.secretKey) {
+                toast(<div className="bg-slate-900 rounded-md shadow-2xl grid place-items-center gap-4 w-full p-4 m-0">
+                    <div className="w-full text-left font-medium text-white">Secret Code</div>
+                    <div className="flex gap-3 justify-between items-center w-full">{result?.data?.secretKey?.split('')?.map((_: string, idx: number) => {
+                        copyToClipboard(result?.data?.secretKey)
+                        return <div key={idx} className="size-10 text-white bg-slate-500/30 grid place-items-center rounded-md">{_}</div>
+                    })}</div>
+                    <button className="bg-slate-100 w-full py-2 flex justify-center items-center gap-2" type="button"><span>Copy</span> <LuCopy /></button>
+                </div>, { duration: 5000, className: 'rounded-md border-none outline-none shadow p-0.5' });
+            }
+            console.log(result, "result")
 
-            });
             copyToClipboard(data?.link)
             setIsLoading(false)
         } catch (error) {
-            toast({
-                title: "Request Failed",
-                description: "There was an issue processing your request.",
-            });
+            toast.message('Request Failed', {
+                description: 'There was an issue processing your request.',
+            })
+
             setIsLoading(false)
 
             console.log(error)
@@ -185,14 +188,19 @@ export function ShareModal({ codeContent }: { codeContent: string }) {
                         />
                     </form>
                 </Form>
+
                 {/* <DialogFooter className="sm:justify-start">
                     <DialogClose asChild>
-                        <Button type="button" variant="secondary">
+                        <Button
+                            
+                            type="button" variant="secondary">
                             Close
                         </Button>
                     </DialogClose>
                 </DialogFooter> */}
             </DialogContent>
         </Dialog>
+
     )
 }
+

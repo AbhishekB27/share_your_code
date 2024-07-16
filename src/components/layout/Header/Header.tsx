@@ -14,6 +14,11 @@ const Header = () => {
             name: 'Snippets',
             path: '/snippets',
             icons: ''
+        },
+        {
+            name: 'Gradients',
+            path: '/gradients',
+            icons: ''
         }
     ]
     const authLinks = [{
@@ -30,7 +35,7 @@ const Header = () => {
         <div className=' bg-slate-600/10 flex justify-between items-center text-white'>
             <Link className='flex justify-start items-center' href='/'><Image src='/ShareYourCode.png' alt='logo' width={100} height={100} /> <span className={`${IndieFlower.className} text-3xl font-extrabold`}>Share Your Code</span></Link>
             <div className='flex justify-start items-center gap-8 divide-x-2'>
-                <div className='font-medium'>
+                <div className='font-medium space-x-3'>
                     {
                         navLinks.map(item => {
                             return <Link href={item.path}>{item.name}</Link>

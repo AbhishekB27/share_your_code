@@ -59,7 +59,7 @@ const CodeShare = ({ code, isCodeShareable }: { code: string, isCodeShareable: b
 
             </div>
             <div
-                onPaste={(e) => setCodeContent(e.clipboardData.getData("Text"))}
+                onPaste={(e) => isCodeShareable && setCodeContent(e.clipboardData.getData("Text"))}
                 className='absolute focus:outline-none bg-white/10 w-full h-full resize-none right-0'
                 id="" ></div>
             <SyntaxHighlighter language="jsx" style={dark} customStyle={customStyle}>
