@@ -4,7 +4,7 @@ import { Input } from '../ui/input'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
 
-const Search = ({ placeholder }) => {
+const Search = () => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
@@ -35,7 +35,7 @@ const Search = ({ placeholder }) => {
 
 export default Search
 
-function SearchIcon(props) {
+function SearchIcon(props: { className: string }) {
     return (
         <svg
             {...props}
