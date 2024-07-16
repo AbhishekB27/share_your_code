@@ -52,6 +52,9 @@ interface CodeData {
   code: string;
 }
 
+interface Placeholder {
+  placeholder: string;
+}
 export default async function Snippets({ searchParams }: SnippetProp) {
   console.log(searchParams, "searchParams")
   const codeSnippets = [
