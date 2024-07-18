@@ -19,7 +19,7 @@ const CodeCard = ({ code }: CodeProps) => {
         <Card className="shadow-lg flex flex-col justify-start hover:shadow-2xl transition-shadow duration-300 bg-card overflow-auto  ">
             <CardHeader className="bg-muted-foreground/10 mb-4 px-6 py-3 rounded-b-md">
                 <div className="flex items-center justify-between">
-                    <div className="text-sm font-medium text-primary px-3 line-clamp-1">{code.title}</div>
+                    <div className="text-sm font-medium text-primary px-3 line-clamp-1">{code?.title}</div>
                     <div className="flex items-center gap-2">
                         <ViewCodeDialog code={code} />
                         <Button variant="ghost" size="sm" className="bg-muted hover:bg-muted/80 rounded-md">

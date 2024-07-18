@@ -18,12 +18,13 @@ async function handleSearch(search: string) {
   console.log(search, "search")
   let res = null;
   if (search.length > 0) {
-    res = await fetch(`http://localhost:3000/api/shareYourCode?search=${search}`, {
+    res = await fetch(`/api/shareYourCode?search=${search}`, {
       cache: 'no-store'
     })
   } else {
-    res = await fetch(`http://localhost:3000/api/shareYourCode`, {
+    res = await fetch(`/api/shareYourCode`, {
       cache: 'no-store'
+
     })
   }
   // The return value is *not* serialized
