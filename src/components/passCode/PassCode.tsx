@@ -41,7 +41,7 @@ export function PassCode() {
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
 
-        const res = await fetch(`http://localhost:3000/api/shareYourCode/verifyCode?uniqueKey=${uniqueKey}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/shareYourCode/verifyCode?uniqueKey=${uniqueKey}`, {
             cache: 'no-store',
             method: 'POST',
             body: JSON.stringify(data),

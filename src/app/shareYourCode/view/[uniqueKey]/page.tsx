@@ -25,7 +25,7 @@ const Page = ({ params, searchParams }: PageProps) => {
         const fetchData = async () => {
             try {
 
-                const res = await fetch(`http://localhost:3000/api/shareYourCode/${params.uniqueKey}?isPrivate=${searchParams.isPrivate}`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/shareYourCode/${params.uniqueKey}?isPrivate=${searchParams.isPrivate}`, {
                     cache: 'no-store',
                     credentials: 'include'
                 });
