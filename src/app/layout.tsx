@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-[#0F0F13]`}>
         <Header />
-        <div className="">
+        <div className="pt-8">
           {children}
           <Toaster expand={true} />
         </div>
