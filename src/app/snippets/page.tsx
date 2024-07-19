@@ -1,31 +1,20 @@
-async function getSnippets() {
-  const res = await fetch('http://localhost:3000/api/shareYourCode', {
-    cache: 'no-store'
-  })
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
-  }
-
-  return res.json()
-}
-
 async function handleSearch(search: string) {
   // "use server"
   console.log(search, "search")
   let res = null;
-  if (search.length > 0) {
-    res = await fetch(`http://localhost:3000/api/shareYourCode?search=${search}`, {
-      cache: 'no-store'
-    })
-  } else {
-    res = await fetch(`http://localhost:3000/api/shareYourCode`, {
-      cache: 'no-store'
+  try {
+    if (search.length > 0) {
+      res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/shareYourCode?search=${search}`, {
+        cache: 'no-store'
+      })
+    } else {
+      res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/shareYourCode`, {
+        cache: 'no-store'
 
-    })
+      })
+    }
+  } catch (error) {
+    console.log(error)
   }
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
@@ -37,7 +26,6 @@ async function handleSearch(search: string) {
 
   return res.json()
 }
-
 import { Button } from "@/components/ui/button"
 import CodeCard from "@/components/codeCard/CodeCard"
 import Search from "@/components/Search/Search"
