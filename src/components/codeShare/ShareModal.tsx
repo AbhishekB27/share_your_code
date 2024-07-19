@@ -52,7 +52,7 @@ export function ShareModal({ codeContent }: { codeContent: string }) {
         try {
             console.log(data)
             setIsLoading(true)
-            const response = await fetch('http://localhost:3000/api/shareYourCode', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/shareYourCode`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
