@@ -13,18 +13,19 @@ async function handleSearch(search: string) {
 
       })
     }
+    if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
   } catch (error) {
     console.log(error)
   }
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
-  }
 
-  return res.json()
 }
 import { Button } from "@/components/ui/button"
 import CodeCard from "@/components/codeCard/CodeCard"
