@@ -80,7 +80,7 @@ export function ShareModal({ codeContent }: { codeContent: string }) {
                             copyToClipboard(result?.data?.secretKey)
                         }}
                         type="button"
-                        className="bg-slate-100 w-full py-2 flex justify-center items-center gap-2" type="button"><span>Copy</span> <LuCopy /></button>
+                        className="bg-slate-100 w-full py-2 flex justify-center items-center gap-2"><span>Copy</span> <LuCopy /></button>
                 </div>, { duration: 10000, className: 'rounded-md border-none outline-none shadow p-0.5' });
             }
             console.log(result, "result")
