@@ -1,3 +1,6 @@
+interface paramsType {
+    token: string
+}
 "use client"
 import { verifyUserEmail } from "@/actions/userAuth"
 import { Button } from "@/components/ui/button"
@@ -5,7 +8,7 @@ import { useRouter } from "next/navigation"
 import { FormEvent, useTransition } from "react"
 import { toast } from "sonner"
 
-export default function Component({ params }: { params: string }) {
+export default function Component({ params }: { params: paramsType }) {
     const router = useRouter()
     const [isPending, startTransition] = useTransition()
 
