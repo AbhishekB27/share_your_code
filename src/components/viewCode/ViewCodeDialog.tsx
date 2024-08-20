@@ -22,20 +22,21 @@ const ViewCodeDialog = ({ code }: CodeProps) => {
     return (
         <Dialog>
             <DialogTrigger>
-                <Button variant="ghost" size="sm" className="bg-muted hover:bg-muted/80 rounded-md">
+                <Button size="sm" className="bg-slate-800/30 hover:bg-slate-800/70 rounded-md">
                     <ViewIcon className="w-5 h-5" />
                     <span className="sr-only">Copy</span>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-5xl min-h-dvh md:min-h-[90vh] overflow-auto">
-                <DialogHeader>
-                    <DialogTitle>{code?.title}</DialogTitle>
-                    <DialogDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
-                    </DialogDescription>
-                </DialogHeader>
-                <CodeShare code={code?.code} isCodeShareable={false} />
+
+            <DialogContent className="max-w-5xl border-none p-0 bg-transparent overflow-auto">
+
+                <div className=" w-full py-20 h-full relative flex items-center justify-center">
+                    {/* Radial gradient for the container to give a faded look */}
+                    <div className="absolute  pointer-events-none inset-0 flex items-center justify-center "></div>
+
+                    <CodeShare code={code?.code} isCodeShareable={false} />
+                </div>
+
             </DialogContent>
         </Dialog>
 

@@ -7,6 +7,12 @@ import {
     CardHeader,
 } from "@/components/ui/card"
 import ViewCodeDialog from '../viewCode/ViewCodeDialog'
+import prettier from 'prettier/standalone';
+import parserBabel from 'prettier/parser-babel';
+import { TbCopy } from "react-icons/tb";
+import { MdContentPaste } from "react-icons/md";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 interface CodeProps {
     code: {
         title: string,
@@ -15,18 +21,30 @@ interface CodeProps {
     }
 }
 const CodeCard = ({ code }: CodeProps) => {
+    const customStyle = {
+        background: 'none',
+        fontFamily: 'inherit',
+        fontSize: 'inherit',
+        color: 'inherit',
+        padding: '0.5rem 1rem',
+        border: 'none',
+        boxShadow: 'none',
+
+    };
     return (
-        <Card className="shadow-lg flex flex-col justify-start hover:shadow-2xl transition-shadow duration-300 bg-card overflow-auto  ">
-            <CardHeader className="bg-muted-foreground/10 mb-4 px-6 py-3 rounded-b-md">
+        <Card className=" bg-inherit text-white shadow-lg relative h-full w-full overflow-hidden  rounded-2xl border border-slate-800 bg-gradient-to-br from-slate-950/50 to-slate-900/80 mx-auto max-w-3xl flex flex-col justify-start hover:shadow-2xl transition-shadow duration-300 ">
+            <span className="absolute left-0 top-1/2 h-48 w-[1px] -translate-y-1/2 animate-pulse bg-gradient-to-b from-indigo-500/0 via-indigo-800 to-indigo-500/0"></span>
+            <span className="absolute right-0 top-1/2 h-48 w-[1px] -translate-y-1/2 animate-pulse bg-gradient-to-b from-indigo-500/0 via-indigo-800 to-indigo-500/0"></span>
+            <CardHeader className=" mb-4 px-6 py-3 border-b border-slate-800">
                 <div className="flex items-center justify-between">
-                    <div className="text-sm font-medium text-primary px-3 line-clamp-1">{code?.title}</div>
+                    <div className="text-sm font-medium bg-indigo-500 px-3 py-1 rounded-md line-clamp-1">{code?.title}</div>
                     <div className="flex items-center gap-2">
                         <ViewCodeDialog code={code} />
-                        <Button variant="ghost" size="sm" className="bg-muted hover:bg-muted/80 rounded-md">
+                        <Button size="sm" className="bg-slate-800/30 hover:bg-slate-800/70 rounded-md">
                             <CopyIcon className="w-5 h-5" />
                             <span className="sr-only">Copy</span>
                         </Button>
-                        <Button variant="ghost" size="sm" className="bg-muted hover:bg-muted/80 rounded-md">
+                        <Button size="sm" className="bg-slate-800/30 hover:bg-slate-800/70 rounded-md">
                             <ShareIcon className="w-5 h-5" />
                             <span className="sr-only">Share</span>
                         </Button>
@@ -34,9 +52,14 @@ const CodeCard = ({ code }: CodeProps) => {
                 </div>
             </CardHeader>
             <CardContent className=''>
-                <pre className="bg-muted rounded-md p-4 overflow-auto">
-                    <code className="text-sm font-mono text-card-foreground">{code.code}</code>
-                </pre>
+                <SyntaxHighlighter language="jsx" style={dark} customStyle={customStyle}>
+                    {/* <pre className=" rounded-md p-4 overflow-auto">
+                        <code className="text-sm font-mono text-card-foreground">{code.code}</code>
+                    </pre> */}
+                    {code.code}
+                    {/* {formattedCode} */}
+                </SyntaxHighlighter>
+
             </CardContent>
 
         </Card>

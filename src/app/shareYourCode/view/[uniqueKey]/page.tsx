@@ -56,7 +56,7 @@ const Page = ({ params, searchParams }: PageProps) => {
     }
 
     return (
-        <div className='grid place-items-center relative'>
+        <div className=' relative'>
             <CodeShare isCodeShareable={false} code={data?.code} />
         </div>
     );

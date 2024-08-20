@@ -1,3 +1,3 @@
-export default function copyToClipboard(text: string): void {
-  navigator.clipboard.writeText(text);
+export default async function copyToClipboard(text: string): Promise<void> {
+  await navigator.clipboard.writeText(text);
 }

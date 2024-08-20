@@ -72,15 +72,20 @@ export function ShareModal({ codeContent }: { codeContent: string }) {
                 toast(<div className="bg-slate-900 rounded-md shadow-2xl grid place-items-center gap-4 w-full p-4 m-0">
                     <div className="w-full text-left font-medium text-white">Secret Code</div>
                     <div className="flex gap-3 justify-between items-center w-full">{result?.data?.secretKey?.split('')?.map((_: string, idx: number) => {
-                        copyToClipboard(result?.data?.secretKey)
+
                         return <div key={idx} className="size-10 text-white bg-slate-500/30 grid place-items-center rounded-md">{_}</div>
                     })}</div>
-                    <button className="bg-slate-100 w-full py-2 flex justify-center items-center gap-2" type="button"><span>Copy</span> <LuCopy /></button>
-                </div>, { duration: 5000, className: 'rounded-md border-none outline-none shadow p-0.5' });
+                    <button
+                        onClick={() => {
+                            copyToClipboard(result?.data?.secretKey)
+                        }}
+                        type="button"
+                        className="bg-slate-100 w-full py-2 flex justify-center items-center gap-2" type="button"><span>Copy</span> <LuCopy /></button>
+                </div>, { duration: 10000, className: 'rounded-md border-none outline-none shadow p-0.5' });
             }
             console.log(result, "result")
 
-            copyToClipboard(data?.link)
+
             setIsLoading(false)
         } catch (error) {
             toast.message('Request Failed', {
