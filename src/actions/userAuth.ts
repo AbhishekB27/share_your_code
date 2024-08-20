@@ -37,6 +37,7 @@ export async function registerUser(formData: FormData) {
     return {
       success: true,
       data: { email: newUser.email, token: verifyToken },
+      message: "Registered successfully",
     };
   } catch (error: any) {
     return {

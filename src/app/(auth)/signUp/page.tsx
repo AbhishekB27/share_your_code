@@ -1,3 +1,9 @@
+interface ResponseType {
+  success: boolean;
+  data: any
+  message: string;
+}
+
 "use client"
 import { registerUser, sendVerificationEmail } from "@/actions/userAuth";
 import Link from "next/link";
@@ -19,7 +25,7 @@ export default function Component() {
 
     console.log({ username, email, password });
     startTransition(async () => {
-      const response = await registerUser(formData)
+      const response: ResponseType = await registerUser(formData)
       if (!response?.success) {
         toast.error(response?.message, { position: "top-center" })
       } else {
