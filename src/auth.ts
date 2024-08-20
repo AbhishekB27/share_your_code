@@ -19,7 +19,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         email: {},
         password: {},
       },
-      authorize: async (credentials) => {
+      authorize: async (credentials: any) => {
         await connectDB();
         try {
           const user = await User.findOne({ email: credentials.email });

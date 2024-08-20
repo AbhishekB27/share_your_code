@@ -1,4 +1,3 @@
-import { verify } from "crypto";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
@@ -23,5 +22,5 @@ const userSchema = new mongoose.Schema({
   verificationToken: String,
 });
 
-const User = mongoose.models?.users || mongoose.model("users", userSchema);
+const User = mongoose.models?.user || mongoose.model("user", userSchema);
 export default User;
